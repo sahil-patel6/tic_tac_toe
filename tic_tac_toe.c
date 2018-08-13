@@ -12,7 +12,7 @@ int main() {
 
     printf("Welcome To Tic Tac Toe game\n");
 
-    printf("You might how to play this game.. Let's start...\n");
+    printf("You might how to play this game.. Let's start..\n");
 
     displayBoard(firstRow, secondRow, thirdRow);
 
