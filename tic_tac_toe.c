@@ -4,69 +4,20 @@ void displayBoard(char a[], char b[], char c[]);
 
 int checkWinner(char a[],char b[],char c[]);
 
+int position,isThePlayer1 = 0, numOfIterations = 1;
+
+char firstRow[3] = {NULL}, secondRow[3] = {NULL}, thirdRow[3] = {NULL};
+
 int main() {
-
-    int position,isThePlayer1 = 0, numOfIterations = 1;
-
-    char firstRow[3] = {NULL}, secondRow[3] = {NULL}, thirdRow[3] = {NULL};
-
     printf("Welcome To Tic Tac Toe game\n");
 
-    printf("You might how to play this game.. Let's start..\n");
+    printf("You might know how to play this game.. Let's start..\n");
 
     displayBoard(firstRow, secondRow, thirdRow);
 
     do {
 
-        if (isThePlayer1 == 0) {
-
-            printf("Enter position to put 'X' in the above board\n");
-
-            scanf("%d", &position);
-
-            if ((position >= 0) && (position <= 3)) {
-
-                firstRow[position - 1] = 'X';
-
-            } else if ((position >= 4) && (position <= 6)) {
-
-                secondRow[position - 4] = 'X';
-
-            } else if ((position >= 7) && (position <= 9)) {
-
-                thirdRow[position - 7] = 'X';
-
-            } else {
-
-                printf("Invalid Input\n");
-
-            }
-
-        } else if (isThePlayer1 == 1) {
-
-            printf("Enter position to put 'Y' in the above board\n");
-
-            scanf("%d", &position);
-
-            if ((position >= 0) && (position <= 3)) {
-
-                firstRow[position - 1] = 'Y';
-
-            } else if ((position >= 4) && (position <= 6)) {
-
-                secondRow[position - 4] = 'Y';
-
-            } else if ((position >= 7) && (position <= 9)) {
-
-                thirdRow[position - 7] = 'Y';
-
-            } else {
-
-                printf("Invalid Input\n");
-
-            }
-
-        }
+        input();
 
         if (isThePlayer1 == 0) {
 
@@ -102,10 +53,128 @@ int main() {
 
         }
 
-    }while ( numOfIterations <= 9 );
+    }while (1);
 
     return 0;
 
+}
+
+void input(){
+
+    if (isThePlayer1 == 0) {
+
+            printf("Enter position to put 'X' in the above board\n");
+
+            scanf("%d", &position);
+
+            if ((position >= 0) && (position <= 3)) {
+
+                if(firstRow[position - 1] == 'X' || firstRow[position - 1] == 'Y'){
+
+                    printf("The value is already been placed\n");
+
+                    input();
+
+                }else{
+
+                    firstRow[position - 1] = 'X';
+
+                }
+
+            } else if ((position >= 4) && (position <= 6)) {
+
+                if(secondRow[position - 4] == 'X' || secondRow[position - 4] == 'Y'){
+
+                    printf("The value is already been placed\n");
+
+                    input();
+
+                }else{
+
+                    secondRow[position - 4] = 'X';
+
+                }
+
+            } else if ((position >= 7) && (position <= 9)) {
+
+                if(thirdRow[position - 7] == 'X' || thirdRow[position - 7] == 'Y'){
+
+                    printf("The value is already been placed\n");
+
+                    input();
+
+                }else{
+
+                    thirdRow[position - 7] = 'X';
+
+                }
+
+
+            } else {
+
+                printf("Invalid Input\n");
+
+                input();
+
+            }
+
+        } else if (isThePlayer1 == 1) {
+
+            printf("Enter position to put 'Y' in the above board\n");
+
+            scanf("%d", &position);
+
+            if ((position >= 0) && (position <= 3)) {
+
+                if(firstRow[position - 1] == 'Y' || firstRow[position - 1] == 'X'){
+
+                    printf("The value is already been placed\n");
+
+                    input();
+
+                }else{
+
+                    firstRow[position - 1] = 'Y';
+
+                }
+
+            } else if ((position >= 4) && (position <= 6)) {
+
+                if(secondRow[position - 4] == 'Y' || secondRow[position - 4] == 'X'){
+
+                    printf("The value is already been placed\n");
+
+                    input();
+
+                }else{
+
+                    secondRow[position - 4] = 'Y';
+
+                }
+
+            } else if ((position >= 7) && (position <= 9)) {
+
+                if(thirdRow[position - 7] == 'Y' || thirdRow[position - 7] == 'X'){
+
+                    printf("The value is already been placed\n");
+
+                    input();
+
+                }else{
+
+                    thirdRow[position - 7] = 'Y';
+
+                }
+
+            } else {
+
+                printf("Invalid Input\n");
+
+                input();
+
+            }
+
+        }
 }
 
 void displayBoard(char a[], char b[], char c[]){
@@ -223,20 +292,39 @@ int checkWinner(char a[],char b[],char c[]){
 
     }
 
+    if (isWinnerX == 1){
 
-    if ( (isWinnerX == 1) || (isWinnerY == 1) ){
+        return 0;
 
-        if (isWinnerX == 1)
+    }else if (isWinnerY == 1){
 
-            return 0;
-
-        else if (isWinnerY == 1)
-
-            return 1;
+        return 1;
 
     } else {
 
-        return 2;
+        int filled = 0;
+
+        for(int i = 0; i < 3; i++){
+            
+            if( a[i] != NULL && b[i] != NULL && c[i] != NULL){
+                
+                filled++;
+                
+            }
+            
+        }
+        if(filled == 3){
+            
+            filled = 0;
+            
+            return 2;
+            
+        }else{
+            
+            filled = 0;
+            
+            return 3;
+        }
 
     }
 
