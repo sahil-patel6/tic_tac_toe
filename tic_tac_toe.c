@@ -305,24 +305,15 @@ int checkWinner(char a[],char b[],char c[]){
         int filled = 0;
 
         for(int i = 0; i < 3; i++){
-            
             if( a[i] != NULL && b[i] != NULL && c[i] != NULL){
-                
                 filled++;
-                
             }
-            
         }
         if(filled == 3){
-            
             filled = 0;
-            
             return 2;
-            
         }else{
-            
             filled = 0;
-            
             return 3;
         }
 
